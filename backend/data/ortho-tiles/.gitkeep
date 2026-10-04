@@ -1,0 +1,3 @@
+Folder ini diisi oleh hasil docs/generate_ortho_tiles.sh (keluaran gdal2tiles.py).
+Strukturnya berupa {z}/{x}/{y}.png setelah tile dihasilkan, lihat README bagian
+"Menambahkan citra foto udara".

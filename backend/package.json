@@ -1,0 +1,15 @@
+{
+  "name": "webgis-banjir-rob-backend",
+  "version": "1.0.0",
+  "description": "Backend API untuk WebGIS Kerentanan Banjir Rob (raster hasil overlay pembobotan)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}

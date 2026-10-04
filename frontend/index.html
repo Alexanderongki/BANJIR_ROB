@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Peta Kerentanan Banjir Rob · Kabupaten Lampung Selatan</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M4 20c3-3 6-3 9 0s6 3 9 0 6-3 9 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M4 26c3-3 6-3 9 0s6 3 9 0 6-3 9 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.55"/>
+        <path d="M16 4v12M16 4l-4 4M16 4l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="brand-text">
+        <h1>Peta Kerentanan Banjir Rob</h1>
+        <p id="meta-wilayah">Memuat wilayah kajian…</p>
+      </div>
+    </div>
+    <div class="topbar-badge" id="meta-metodologi">Coastal Vulnerability Index</div>
+  </header>
+
+  <div class="body">
+
+    <aside class="sidebar">
+
+      <details class="panel" open>
+        <summary>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M3 16V9M9 16V4M15 16v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>Ringkasan wilayah kajian</span>
+          <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="panel-body">
+          <div class="stat-row">
+            <div class="stat">
+              <span class="stat-value" id="stat-luas">–</span>
+              <span class="stat-label">km² tercakup (perkiraan)</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value">5</span>
+              <span class="stat-label">kelas kerentanan</span>
+            </div>
+          </div>
+          <div id="stat-per-kelas" class="class-bars"></div>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M10 2l8 4-8 4-8-4 8-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 10l8 4 8-4M2 14l8 4 8-4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span>Kelas kerentanan</span>
+          <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="panel-body">
+          <ul class="legend" id="legend-list"></ul>
+        </div>
+      </details>
+
+      <details class="panel" id="panel-klik">
+        <summary>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><circle cx="10" cy="10" r="1.6" fill="currentColor"/></svg>
+          <span>Titik yang diklik</span>
+          <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="panel-body">
+          <p class="hint" id="klik-hint">Klik di dalam area berwarna pada peta untuk melihat kelas kerentanan pada titik tersebut.</p>
+          <div id="klik-hasil" hidden>
+            <p class="detail-class" id="klik-class"></p>
+            <p class="klik-coord" id="klik-coord"></p>
+          </div>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.8"/><path d="M10 9v5M10 6.5v.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>Tentang lapisan ini</span>
+          <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="panel-body">
+          <p class="note" id="meta-sumber"></p>
+          <p class="note" id="meta-catatan-luas"></p>
+          <p class="note">
+            Berkas raster asli dapat diunduh di
+            <a href="/raster-assets/Hasil_Overlay.tif" download>Hasil_Overlay.tif</a>.
+          </p>
+        </div>
+      </details>
+
+      <details class="panel panel-disclaimer">
+        <summary>
+          <svg class="icon" viewBox="0 0 20 20" fill="none"><path d="M10 2l8.5 15H1.5L10 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 8v4M10 14.5v.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Catatan wilayah</span>
+          <svg class="chev" viewBox="0 0 20 20" fill="none"><path d="M6 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="panel-body">
+          <p id="meta-disclaimer"></p>
+        </div>
+      </details>
+
+    </aside>
+
+    <main class="map-wrap">
+      <div id="map"></div>
+
+      <div class="coord-readout" id="coord-readout">– , –</div>
+
+      <svg class="north-arrow" viewBox="0 0 28 40" aria-hidden="true">
+        <path d="M14 2l7 20h-5v14h-4V22H7z" fill="currentColor"/>
+        <text x="14" y="38" text-anchor="middle" font-size="7" fill="currentColor" font-family="IBM Plex Mono, monospace">U</text>
+      </svg>
+    </main>
+
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

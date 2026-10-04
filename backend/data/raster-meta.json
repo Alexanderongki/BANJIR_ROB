@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "title": "Peta Kerentanan Banjir Rob",
+    "wilayah": "Wilayah pesisir Kabupaten Lampung Selatan, Provinsi Lampung",
+    "metodologi": "Coastal Vulnerability Index (CVI) dengan metode overlay pembobotan (weighted overlay)",
+    "sumber_raster": "Hasil_Overlay.tif, diunggah langsung oleh pengguna sebagai hasil akhir overlay pembobotan dari perangkat SIG",
+    "catatan_wilayah": "Batas administrasi Kabupaten Lampung Selatan dicocokkan terhadap data GADM hanya sebagai konteks lokasi, bukan bagian dari hasil analisis",
+    "catatan_luas": "Perkiraan luas dihitung dari ukuran piksel dalam koordinat geografis (EPSG:4326) sehingga bersifat kasar, gunakan hasil dari perangkat SIG asli untuk angka presisi"
+  },
+  "raster": {
+    "file": "Hasil_Overlay.tif",
+    "image": "cvi_overlay.png",
+    "crs": "EPSG:4326",
+    "width": 448,
+    "height": 250,
+    "bounds": {
+      "west": 105.215369381,
+      "south": -5.5652459,
+      "east": 105.261727588,
+      "north": -5.539312952
+    },
+    "nodata_value": 255.0,
+    "pixel_area_m2": 132.39
+  },
+  "classes": [
+    {
+      "value": 1,
+      "label": "Sangat Rendah",
+      "color": "#3a7ca5",
+      "pixel_count": 21632
+    },
+    {
+      "value": 2,
+      "label": "Rendah",
+      "color": "#4c9a6a",
+      "pixel_count": 7330
+    },
+    {
+      "value": 3,
+      "label": "Sedang",
+      "color": "#d9b44a",
+      "pixel_count": 10492
+    },
+    {
+      "value": 4,
+      "label": "Tinggi",
+      "color": "#d97f3d",
+      "pixel_count": 4278
+    },
+    {
+      "value": 5,
+      "label": "Sangat Tinggi",
+      "color": "#c0483c",
+      "pixel_count": 3317
+    }
+  ]
+}
